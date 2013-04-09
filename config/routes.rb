@@ -2,6 +2,9 @@ Firestudy::Application.routes.draw do
 
   resources :questions
 
+  if Rails.env.development?
+    match "/uploads/*path" => "gridfs#serve"
+  end
 
   resources :exams do
     collection do
@@ -10,10 +13,8 @@ Firestudy::Application.routes.draw do
   end
 
 
-  resources :courses do
-    get 'download_file'
-  end
-  match "/images/uploads/*path" => "gridfs#serve"
+  resources :courses
+
 
   root :to => "home#index"
 

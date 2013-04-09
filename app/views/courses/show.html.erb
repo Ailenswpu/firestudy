@@ -12,11 +12,15 @@
 
 <p>
   <b>Avatar:</b>
-  <%= image_tag @course.avatar.url(:thumb) %>
+  <%= image_tag @course.avatar.url %>
 </p>
 <p>
   <b>video:</b>
   <%= video_tag @course.video.url, :size => "320x240", :controls => true %>
+</p>
+<p>
+  <b>Doc:</b>
+  <%= link_to "download" , @course.doc_url%>
 </p>
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

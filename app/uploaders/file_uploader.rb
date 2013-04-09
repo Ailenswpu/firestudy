@@ -13,8 +13,8 @@ class FileUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :grid_fs
+  #storage :file
+  storage :grid_fs
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -26,9 +26,9 @@ class FileUploader < CarrierWave::Uploader::Base
   process :set_content_type
 
 
-  version :thumb do
-    process :resize_to_fit => [100, 100]
-  end
+  # version :thumb do
+  #   process :resize_to_fit => [100, 100]
+  # end
 
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -54,7 +54,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-     %w(jpg jpeg gif png pdf work xls ppt mp4)
+    # %w(jpg jpeg gif png pdf work xls ppt mp4)
   # end
 
   # Override the filename of the uploaded files:

@@ -14,6 +14,6 @@ class Course
 
   mount_uploader :avatar, FileUploader
   mount_uploader :video, VideoUploader
-  mount_uploader :doc, VideoUploader
+  mount_uploader :doc, FileUploader
 
 end
