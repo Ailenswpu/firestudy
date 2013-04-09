@@ -1,0 +1,7 @@
+<% @courses.each do |course| %>
+<div class="span3">
+  <a href="/courses/<%= course.id%>">
+    <img src="<%= course.avatar.url%>" class="img-polaroid">
+  </a>
+</div>
+<% end %>

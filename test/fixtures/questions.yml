@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  answer: MyString
+  option: MyString
+  exam_id: 1
+
+two:
+  title: MyString
+  answer: MyString
+  option: MyString
+  exam_id: 1

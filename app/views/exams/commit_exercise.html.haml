@@ -1,0 +1,6 @@
+%p#notice= notice
+%p
+ %h1 您的得分情况如下：
+- @score_hash.each_pair do |key,value|
+ %p= Question.find(key).title
+ = (value == true)? "答对" : "答错"

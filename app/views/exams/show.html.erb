@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Title:</b>
+  <%= @exam.title %>
+</p>
+<%= form_for :answer,url: "/exams/commit_exercise" do |f| %>
+<% @exam.questions.each_with_index do |question,index|%>
+
+<p><%= index + 1%>、<%= question.title%></p>
+<p>
+  <% option(question).each_pair do |key ,value| %>
+  <%= key%>  <%= value%><br/>
+  <% end %>
+  <hr>
+</p>
+<p>
+  <% %w(A B C D).each do |s| %>
+  <%= f.radio_button question.id,s%><%= s%>
+  <% end %>
+</p>
+<hr>
+<% end %>
+<%= submit_tag '提交' %>
+<% end %>
+<%= link_to 'Edit', edit_exam_path(@exam) %> |
+<%= link_to 'Back', exams_path %>
