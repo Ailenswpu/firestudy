@@ -13,6 +13,7 @@ gem 'mongoid-grid_fs'
 #gem 'aws-sdk', '~> 1.3.4'
 #gem 'rmagick'
 
+
 #haml
 gem 'haml'
 
