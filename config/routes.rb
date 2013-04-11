@@ -1,5 +1,8 @@
 Firestudy::Application.routes.draw do
 
+  resources :documents
+
+
   resources :questions
 
   if Rails.env.development?

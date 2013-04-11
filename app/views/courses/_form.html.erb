@@ -17,8 +17,14 @@
 </div>
 <div class="field">
   <%= f.label :description %><br />
-  <%= f.text_area :description %>
+  <%= f.text_area :description,size: "10x10" %>
 </div>
+
+<div class="field">
+  <%= f.label :category %><br />
+  <%= f.select :category,Course::CATEGORY %>
+</div>
+
 <div class="field">
   <%= f.label :avatar %><br />
   <%= f.file_field :avatar %>

@@ -1,7 +1,16 @@
-<% @courses.each do |course| %>
-<div class="span3">
-  <a href="/courses/<%= course.id%>">
-    <img src="<%= course.avatar.url%>" class="img-polaroid">
-  </a>
-</div>
+<%= stylesheet_link_tag "index", :media => "all" %>
+<% Course::CATEGORY.each do |category|%>
+<div><%= category%></div>
+<ul class="inline">
+  <li>
+    <% Course.where(category: category).to_a.each do |course| %>
+    <div class="span3">
+      <a href="/courses/<%= course.id%>">
+        <img src="<%= course.avatar.url%>" class="img-polaroid" target="_blank" id="thumb">
+      </a>
+    </div>
+    <% end %>
+  </li>
+</ul>
+
 <% end %>
