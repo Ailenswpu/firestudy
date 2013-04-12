@@ -1,10 +1,11 @@
 require 'rubygems'
-require 'mongo'
+#require 'mongo'
 source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
 gem 'mongo_mapper'
 gem 'bson'
+gem 'mongo'
 gem 'bson_ext'
 gem 'mongoid'
 gem 'mongoid-grid_fs'
