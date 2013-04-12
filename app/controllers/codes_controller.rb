@@ -1,4 +1,5 @@
 #encoding : utf-8
+require 'digest/sha1'
 class CodesController < ApplicationController
   layout 'code'
   # GET /codes
@@ -8,15 +9,14 @@ class CodesController < ApplicationController
   end
 
   def realtime
-   Code.first.update_attributes(code: params[:code])
-   render json: Code.first.code.to_s
+    url = Digest::SHA1.hexdigest(Time.now.to_s)
+    redirect_to new_code_path(token: url)
   end
 
   # GET /codes/1
   # GET /codes/1.json
   def show
     @code = Code.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @code }
@@ -27,7 +27,7 @@ class CodesController < ApplicationController
   # GET /codes/new.json
   def new
     @code = Code.new
-
+    session[:url] = request.url.split('?')[1].split('=')[1].to_s
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @code }

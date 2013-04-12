@@ -11,20 +11,23 @@
         var x = "All this is syntax highlighted";
         return x;
     }
+  <%= @token %>
 </div>
     <script type="text/javascript">
     var client = new Faye.Client('http://localhost:9292/faye');
    $(document).ready(function() {
+    params = document.URL.split('?')[1].split('=')[1];
     var editor = ace.edit("code");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/javascript");
     $("#code").keyup(function(event) {
         realtimecode = editor.getValue();
-        client.publish('/codes/new', {code: realtimecode});
+        client.publish('/codes/'+params, {code: realtimecode});
     });
-    var subscription = client.subscribe('/codes/new', function(message) {
+    var subscription = client.subscribe('/codes/'+params, function(message) {
         editor.setValue(message.code);
         editor.clearSelection();
     });
+
 });
 </script>
