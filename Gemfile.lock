@@ -198,6 +198,7 @@ DEPENDENCIES
   jquery-rails
   mime-types
   mini_magick
+  mongo
   mongo_mapper
   mongoid
   mongoid-grid_fs
