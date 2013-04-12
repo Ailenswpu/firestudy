@@ -1,0 +1,30 @@
+<style type="text/css" media="screen">
+#code {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+</style>
+    <div id="code">function foo(items) {
+        var x = "All this is syntax highlighted";
+        return x;
+    }
+</div>
+    <script type="text/javascript">
+    var client = new Faye.Client('http://localhost:9292/faye');
+   $(document).ready(function() {
+    var editor = ace.edit("code");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    $("#code").keyup(function(event) {
+        realtimecode = editor.getValue();
+        client.publish('/codes/new', {code: realtimecode});
+    });
+    var subscription = client.subscribe('/codes/new', function(message) {
+        editor.setValue(message.code);
+        editor.clearSelection();
+    });
+});
+</script>

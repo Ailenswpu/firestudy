@@ -1,5 +1,12 @@
 Firestudy::Application.routes.draw do
 
+  resources :codes do
+    collection do
+      post 'realtime'
+    end
+  end
+
+
   resources :documents
 
 

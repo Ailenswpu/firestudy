@@ -13,12 +13,16 @@ gem 'mongoid-grid_fs'
 #gem 'aws-sdk', '~> 1.3.4'
 #gem 'rmagick'
 
+gem "thin"
+gem 'faye'
+gem 'eventmachine'
 
 #haml
 gem 'haml'
 
 #slug
 gem 'mongoid_slug'
+
 
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'carrierwave'
