@@ -24,7 +24,7 @@
     });
     var subscription = client.subscribe('/codes', function(message) {
         editor.setValue(message.code);
-        editor.clearSelection();
+        editor.focus();
     });
 });
 </script>
