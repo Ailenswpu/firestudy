@@ -9,7 +9,8 @@ class CodesController < ApplicationController
   end
 
   def realtime
-    url = Digest::SHA1.hexdigest(Time.now.to_s)
+    url = Digest::SHA1.hexdigest(params[:username])
+    session[:username] = params[:username]
     redirect_to new_code_path(token: url)
   end
 

@@ -1,3 +1,16 @@
-<div class="text-center">
-  <%= button_to "进入房间",realtime_codes_path,class: "btn btn-large  btn-primary"%>
+<div id="content" class="text-center">
+  <p class="text-info info">输入昵称，复制URL给你朋有即可结对编程</p>
+  <form action="/codes/realtime" class="form-inline" method="post">
+    <input id="username" style="height: 31px;margin-right: 10px;"  name="username" class="input-larage" type="text" placeholder="输入您的昵称进入">
+    <button type="submit" class="btn btn-primary btn-large">点击进入</button>
+  </form>
 </div>
+<style type="text/css">
+  body{
+     background-image: url(/images/bg.jpg);
+  }
+  .info{
+    font-size: 17px;
+  margin-bottom: 8px;
+  }
+</style>

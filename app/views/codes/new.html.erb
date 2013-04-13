@@ -1,33 +1,61 @@
-<style type="text/css" media="screen">
-#code {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-</style>
-    <div id="code">function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
-    }
-  <%= @token %>
+<div id="main">
+  <div id="topbar">
+    <%= select("theme","theme" , %w(选择编程语言)+Code::CODE_THEME) %>
+  </div>
+  <div id="code">(_2b || ! _2b).is_a? Question
+  </div>
+  <div id="sidebar">
+  <div id= "messages">
+    <ul id="listmessage">
+      <p class="text-error">
+      <h4>亲，你们可以在此交流哦！</h4>
+      </p>
+    </ul>
+  </div>
+  <div class="send-message">
+    <textarea id="message-text" rows="3" placeholder="发送消息"></textarea>
+    <button id="send" class="btn  btn-large  btn-primary" type="button">发送</button>
+  </div>
+  <div>
 </div>
-    <script type="text/javascript">
-    var client = new Faye.Client('http://localhost:9292/faye');
-   $(document).ready(function() {
-    params = document.URL.split('?')[1].split('=')[1];
-    var editor = ace.edit("code");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-    $("#code").keyup(function(event) {
-        realtimecode = editor.getValue();
-        client.publish('/codes/'+params, {code: realtimecode});
-    });
-    var subscription = client.subscribe('/codes/'+params, function(message) {
-        editor.setValue(message.code);
-        editor.clearSelection();
-    });
 
-});
+<script type="text/javascript">
+  var client = new Faye.Client('<%= FAYE_SERVER %>/faye');
+  $(document).ready(function() {
+  params = document.URL.split('?')[1].split('=')[1];
+  var editor = ace.edit("code");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/ruby");
+  $("#code").keyup(function(event) {
+  //editor.getSession().on('change', function(e) {
+  realtimecode = editor.getValue();
+  client.publish('/codes/'+params, {code: realtimecode});
+  });
+  var subscription = client.subscribe('/codes/'+params, function(message) {
+  editor.setValue(message.code);
+  editor.clearSelection();
+  });
+
+  //Theme
+  $('#theme_theme').change(function() {
+  mode_name = $('option:selected', this).attr('value').toLowerCase();
+  editor.getSession().setMode("ace/mode/" + mode_name);
+  });
+
+  //Send Message
+  $('#send').click(function(){
+  msg =  $('#message-text').val();
+  client.publish('/newmessage'+params, { newmsg: msg });
+  });
+
+  //websocket message
+  client.subscribe('/newmessage'+params, function(message) {
+    var  htmlmessage   =  " <li> ";
+          htmlmessage += "<img id='avatar' src='/images/avatar.jpg'/>";
+          htmlmessage += "<%= session[:username].to_s + ': '%>" +  message.newmsg;
+          htmlmessage += "</li>";
+          $('#message-text').val("");
+          $('#listmessage').append(htmlmessage);
+    });
+      });
 </script>

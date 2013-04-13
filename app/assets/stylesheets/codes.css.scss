@@ -1,3 +1,50 @@
 // Place all the styles related to the codes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#code {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 35px;
+    width: 50%;
+}
+body{
+    margin-top: 0px;
+}
+#sidebar{
+   width: 50%;
+   height: 90%;
+   position: absolute;
+   right: 0;
+}
+.send-message{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#message-text{
+    resize: none;
+    width: 500px;
+    min-width:500px;
+}
+#messages{
+    overflow: auto;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    overflow: auto;
+    background: #B2DFEE;
+    border-bottom: 10px solid #1874CD;
+}
+
+li{
+  margin-bottom: 2px;
+  border-bottom: 1px solid #FFF;
+}
+
+#content{
+    margin-top: 25%;
+}
