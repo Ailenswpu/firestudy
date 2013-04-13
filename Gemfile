@@ -1,7 +1,6 @@
 require 'rubygems'
 #require 'mongo'
 source 'http://ruby.taobao.org'
-
 gem 'rails', '3.2.13'
 gem 'mongo_mapper'
 gem 'bson'

@@ -1,0 +1,14 @@
+---
+applications:
+- name: pair-coding
+  framework: rails3
+  runtime: ruby19
+  memory: 256M
+  instances: 1
+  url: pair-coding.${target-base}
+  path: .
+  services:
+    mongodb-pair:
+      vendor: mongodb
+      version: '2.0'
+      tier: free

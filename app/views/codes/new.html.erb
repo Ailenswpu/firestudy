@@ -9,6 +9,7 @@
     <ul id="listmessage">
       <p class="text-error">
       <h4>亲，你们可以在此交流哦！</h4>
+
       </p>
     </ul>
   </div>
@@ -18,7 +19,6 @@
   </div>
   <div>
 </div>
-
 <script type="text/javascript">
   var client = new Faye.Client('<%= FAYE_SERVER %>/faye');
   $(document).ready(function() {
@@ -26,6 +26,7 @@
   var editor = ace.edit("code");
   editor.setTheme("ace/theme/monokai");
   editor.getSession().setMode("ace/mode/ruby");
+  username =  '<%= session[:username].nil?? "你的队友" : session[:username].to_s %>';
   $("#code").keyup(function(event) {
   //editor.getSession().on('change', function(e) {
   realtimecode = editor.getValue();
@@ -45,14 +46,14 @@
   //Send Message
   $('#send').click(function(){
   msg =  $('#message-text').val();
-  client.publish('/newmessage'+params, { newmsg: msg });
+  client.publish('/newmessage'+params, { newmsg: msg, username: username });
   });
 
   //websocket message
   client.subscribe('/newmessage'+params, function(message) {
     var  htmlmessage   =  " <li> ";
           htmlmessage += "<img id='avatar' src='/images/avatar.jpg'/>";
-          htmlmessage += "<%= session[:username].to_s + ': '%>" +  message.newmsg;
+          htmlmessage += message.username + " : " +  message.newmsg;
           htmlmessage += "</li>";
           $('#message-text').val("");
           $('#listmessage').append(htmlmessage);
